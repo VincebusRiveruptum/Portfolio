@@ -1,0 +1,4 @@
+5.3.2023
+	- Fix responsiveness for mobile view				OK
+	- Fix bugs (6 errors) that appear on browser devtools		OK
+	- Implement "Contact" email section functionality 		NOT YET
