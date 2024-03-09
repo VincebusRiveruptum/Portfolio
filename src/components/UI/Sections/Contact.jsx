@@ -1,7 +1,28 @@
 import React from "react";
+import { useState } from "react";
 import styled from "styled-components";
+import { options, serviceId, templateID } from "../../../options";
+import ConfirmationModal from "../Elements/ConfirmationModal";
+import emailjs from "@emailjs/browser";
 
 export default function Contact() {
+  const [mailConfirmation, setMailConfirmation] = useState(false);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    emailjs.sendForm(serviceId, templateID, e.target, options).then(
+      (result) => {
+        console.log(result.text);
+      },
+      (error) => {
+        console.log(error.text);
+      }
+    );
+    
+    setMailConfirmation(true);   
+  }
+
   return (
     <Wrapper id="contact">
       <ContactBox className="whiteBg">
@@ -9,23 +30,57 @@ export default function Contact() {
           <HeaderInfo>
             <h1 className="font40 extraBold">Contact me</h1>
             <p className="font13">
-              If you are interested hiring me you can contact me directly filling the form below.              
+              If you are interested hiring me you can contact me directly
+              filling the form below.
             </p>
           </HeaderInfo>
           <div className="row" style={{ paddingBottom: "30px" }}>
             <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-              <Form>
+              <Form onSubmit={handleSubmit} id="contactForm">
                 <label className="font13">First name:</label>
-                <input type="text" id="fname" name="fname" className="font20 extraBold" />
+                <input
+                  type="text"
+                  id="fname"
+                  name="fname"
+                  className="font20 extraBold"
+                  required
+                />
                 <label className="font13">Email:</label>
-                <input type="text" id="email" name="email" className="font20 extraBold" />
+                <input
+                  type="text"
+                  id="email"
+                  name="email"
+                  className="font20 extraBold"
+                  required
+                />
                 <label className="font13">Subject:</label>
-                <input type="text" id="subject" name="subject" className="font20 extraBold" />
-                <textarea rows="4" cols="50" type="text" id="message" name="message" className="font20 extraBold" />
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  className="font20 extraBold"
+                  required
+                />
+                <textarea
+                  rows="4"
+                  cols="50"
+                  type="text"
+                  id="message"
+                  name="message"
+                  className="font20 extraBold"
+                  required
+                />
               </Form>
               <SumbitWrapper className="flex">
-                <ButtonInput type="submit" value="Send Message" className="pointer animate radius8" style={{ maxWidth: "220px" }} />
+                <ButtonInput
+                  form="contactForm"
+                  type="submit"
+                  value="Send Message"
+                  className="pointer animate radius8"
+                  style={{ maxWidth: "220px" }}
+                />
               </SumbitWrapper>
+              <ConfirmationModal mailConfirmation={mailConfirmation}/>
             </div>
           </div>
         </div>
@@ -35,11 +90,11 @@ export default function Contact() {
 }
 
 const ContactBox = styled.div`
-  display:flex;
-  flex-direction:center;
+  display: flex;
+  flex-direction: center;
   width: 100%;
-  padding-top:100px;
-  padding-bottom:100px;
+  padding-top: 100px;
+  padding-bottom: 100px;
 `;
 
 const Wrapper = styled.section`
@@ -94,12 +149,3 @@ const SumbitWrapper = styled.div`
     margin-bottom: 50px;
   }
 `;
-
-
-
-
-
-
-
-
-

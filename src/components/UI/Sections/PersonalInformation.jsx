@@ -22,7 +22,7 @@ export default function PersonalInformation() {
               </p>
             </Degree>
             <Address>
-              <h1 className="font30 extraBold"> Adresss</h1>
+              <h1 className="font30 extraBold"> Address</h1>
               <p className="font13">Santiago, Chile</p>
             </Address>
           </Pinfo>

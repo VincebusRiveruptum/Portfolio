@@ -1,5 +1,6 @@
 import Landing from './components/screens/Landing';
 import {Helmet} from "react-helmet";
+
 export default function App() {
   return (
     <div className="App">
