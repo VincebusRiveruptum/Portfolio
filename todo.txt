@@ -3,3 +3,6 @@
 	- Fix bugs (6 errors) that appear on browser devtools				OK
 	- Implement "Contact" email section functionality 					OK
 		- Add option to close modal after sending email sucessfully.	NOT YET
+		- Implement better form practices
+			- Lock form when submitting
+			- Lock form after user already sent a message with his email

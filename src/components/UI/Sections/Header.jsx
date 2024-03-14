@@ -1,5 +1,7 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
+import { Link } from "react-scroll";
 import SocialMedia from "../Elements/SocialMedia";
 // Components
 import FullButton from "../Buttons/FullButton";
@@ -9,6 +11,14 @@ import FlagIcon from "../../assets/svg/Services/FlagIcon";
 // Assets
 
 export default function Header() {
+  const [y, setY] = useState(window.scrollY);
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => setY(window.scrollY));
+    return () => {
+      window.removeEventListener("scroll", () => setY(window.scrollY));
+    };
+  }, [y]);
   return (
     <Wrapper id="home">
       <About className="lightBg">
@@ -39,9 +49,10 @@ export default function Header() {
           </SocialMediaLinks>
 
           <BtnWrapper>
-            <FullButton title="Contact me" />
+            <Link to="contact" smooth={true}>
+              <FullButton title="Contact me" color="#ff4060" />
+            </Link>
           </BtnWrapper>
-
         </RightSide>
       </About>
     </Wrapper>

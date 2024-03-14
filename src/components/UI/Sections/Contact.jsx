@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { options, serviceId, templateID } from "../../../options";
 import ConfirmationModal from "../Elements/ConfirmationModal";
 import emailjs from "@emailjs/browser";
+import FullButton from "../Buttons/FullButton";
 
 export default function Contact() {
   const [mailConfirmation, setMailConfirmation] = useState(false);
@@ -19,86 +20,81 @@ export default function Contact() {
         console.log(error.text);
       }
     );
-    
-    setMailConfirmation(true);   
+
+    setMailConfirmation(true);
   }
 
   return (
     <Wrapper id="contact">
-      <ContactBox className="whiteBg">
-        <div className="container">
-          <HeaderInfo>
-            <h1 className="font40 extraBold">Contact me</h1>
-            <p className="font13">
-              If you are interested hiring me you can contact me directly
-              filling the form below.
-            </p>
-          </HeaderInfo>
-          <div className="row" style={{ paddingBottom: "30px" }}>
-            <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-              <Form onSubmit={handleSubmit} id="contactForm">
-                <label className="font13">First name:</label>
-                <input
-                  type="text"
-                  id="fname"
-                  name="fname"
-                  className="font20 extraBold"
-                  required
-                />
-                <label className="font13">Email:</label>
-                <input
-                  type="text"
-                  id="email"
-                  name="email"
-                  className="font20 extraBold"
-                  required
-                />
-                <label className="font13">Subject:</label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  className="font20 extraBold"
-                  required
-                />
-                <textarea
-                  rows="4"
-                  cols="50"
-                  type="text"
-                  id="message"
-                  name="message"
-                  className="font20 extraBold"
-                  required
-                />
-              </Form>
-              <SumbitWrapper className="flex">
-                <ButtonInput
-                  form="contactForm"
-                  type="submit"
-                  value="Send Message"
-                  className="pointer animate radius8"
-                  style={{ maxWidth: "220px" }}
-                />
-              </SumbitWrapper>
-              <ConfirmationModal mailConfirmation={mailConfirmation}/>
-            </div>
-          </div>
-        </div>
+      <ContactBox className="whiteBg container">
+        <HeaderInfo>
+          <h1 className="font40 extraBold">Contact me</h1>
+          <p className="font13">
+            If you are interested hiring me you can contact me directly filling
+            the form below.
+          </p>
+        </HeaderInfo>
+        <FormWrapper>
+          <MessageForm onSubmit={handleSubmit} id="contactForm">
+            <label className="font13">First name:</label>
+            <input
+              type="text"
+              id="fname"
+              name="fname"
+              className="font20 extraBold"
+              required
+            />
+            <label className="font13">Email:</label>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              className="font20 extraBold"
+              required
+            />
+            <label className="font13">Subject:</label>
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              className="font20 extraBold"
+              required
+            />
+            <textarea
+              rows="4"
+              cols="50"
+              type="text"
+              id="message"
+              name="message"
+              className="font20 extraBold"
+              required
+            />
+          </MessageForm>
+        </FormWrapper>
+
+        <SumbitWrapper className="flex">
+          <FullButton
+            form="contactForm"
+            type="submit"
+            value="Send Message"
+            color="#7620ff"
+          />
+        </SumbitWrapper>
+        <ConfirmationModal mailConfirmation={mailConfirmation} />
       </ContactBox>
     </Wrapper>
   );
 }
 
 const ContactBox = styled.div`
-  display: flex;
-  flex-direction: center;
-  width: 100%;
-  padding-top: 100px;
-  padding-bottom: 100px;
+  display: inline-block;
+  padding: 5%;
 `;
 
 const Wrapper = styled.section`
-  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-bottom:5%;
 `;
 
 const HeaderInfo = styled.div`
@@ -106,7 +102,8 @@ const HeaderInfo = styled.div`
     text-align: center;
   }
 `;
-const Form = styled.form`
+const MessageForm = styled.form`
+  width: 60%;
   padding: 70px 0 30px 0;
   input,
   textarea {
@@ -122,26 +119,16 @@ const Form = styled.form`
   textarea {
     min-height: 100px;
   }
-  @media (max-width: 860px) {
+  @media (max-width: 760px) {
     padding: 30px 0;
+    width:100%;
   }
 `;
-const ButtonInput = styled.input`
-  border: 1px solid #7620ff;
-  background-color: #7620ff;
-  width: 100%;
-  padding: 15px;
-  outline: none;
-  color: #fff;
-  :hover {
-    background-color: #580cd2;
-    border: 1px solid #7620ff;
-    color: #fff;
-  }
-  @media (max-width: 991px) {
-    margin: 0 auto;
-  }
-`;
+
+const FormWrapper = styled.div`
+  display:flex;
+  justify-content:center;
+`
 
 const SumbitWrapper = styled.div`
   @media (max-width: 991px) {
